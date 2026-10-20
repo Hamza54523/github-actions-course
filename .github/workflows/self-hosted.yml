@@ -1,0 +1,16 @@
+
+name: Test Self-Hosted Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-runner:
+    runs-on: self-hosted
+    steps:
+      - name: Display runner information
+        shell: powershell
+        run: |
+          Write-Output "Self-hosted runner is working!"
+          Write-Output "Computer: $env:COMPUTERNAME"
+          Write-Output "Operating System: Windows"
