@@ -24,4 +24,4 @@ jobs:
         run: 'echo "Triggered by: $ACTOR"'
 
       - name: Show message
-        run: 'echo "GitHub Actions is working!"'
+        run: 'echo "Pull request trigger test"'

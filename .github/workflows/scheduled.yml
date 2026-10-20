@@ -1,0 +1,17 @@
+
+name: Scheduled Workflow Demo
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  scheduled-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show schedule message
+        run: echo "Scheduled workflow is working!"
+
+      - name: Show date and time
+        run: date -u
