@@ -1,0 +1,44 @@
+
+name: Multi-OS Runners Demo
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  ubuntu-runner:
+    name: Ubuntu Runner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display Linux information
+        run: |
+          echo "Running on Ubuntu"
+          uname -a
+          echo "Student: $GITHUB_ACTOR"
+
+  windows-runner:
+    name: Windows Runner
+    runs-on: windows-latest
+    steps:
+      - name: Display Windows information
+        shell: pwsh
+        run: |
+          Write-Output "Running on Windows"
+          Get-ComputerInfo | Select-Object WindowsProductName, WindowsVersion
+          Write-Output "PowerShell version:"
+          $PSVersionTable.PSVersion
+          Write-Output "Chocolatey version:"
+          choco --version
+
+  macos-runner:
+    name: macOS Runner
+    runs-on: macos-latest
+    steps:
+      - name: Display macOS and Swift information
+        run: |
+          echo "Running on macOS"
+          sw_vers
+          echo "Swift version:"
+          swift --version
