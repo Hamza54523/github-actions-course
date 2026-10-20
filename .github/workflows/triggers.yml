@@ -1,0 +1,23 @@
+
+name: Workflow Triggers Demo
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  trigger-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show event
+        run: echo "Event name: ${{ github.event_name }}"
+
+      - name: Show user
+        run: echo "Triggered by: ${{ github.actor }}"
+
+      - name: Show message
+        run: echo "GitHub Actions is working!"
