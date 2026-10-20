@@ -1,0 +1,37 @@
+
+name: Manual Inputs Demo
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Enter your name"
+        required: true
+        type: string
+        default: "Hamza"
+      greeting:
+        description: "Choose a greeting"
+        required: true
+        type: choice
+        options:
+          - Hello
+          - Welcome
+          - Good morning
+      data:
+        description: "Enter some data"
+        required: true
+        type: string
+        default: "GitHub Actions assignment"
+
+jobs:
+  manual-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display inputs
+        env:
+          STUDENT_NAME: ${{ inputs.name }}
+          GREETING: ${{ inputs.greeting }}
+          ASSIGNMENT_DATA: ${{ inputs.data }}
+        run: |
+          echo "$GREETING, $STUDENT_NAME!"
+          echo "Data: $ASSIGNMENT_DATA"
