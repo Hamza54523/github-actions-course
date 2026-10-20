@@ -1,0 +1,46 @@
+
+name: Contexts and Conditionals Demo
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  COURSE_NAME: GitHub Actions Course
+
+jobs:
+  context-demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display context information
+        env:
+          STUDENT: ${{ github.actor }}
+          EVENT: ${{ github.event_name }}
+          OPERATING_SYSTEM: ${{ runner.os }}
+          COURSE: ${{ env.COURSE_NAME }}
+          DEMO_MESSAGE: ${{ vars.DEMO_MESSAGE }}
+        run: |
+          echo "Student: $STUDENT"
+          echo "Event: $EVENT"
+          echo "Operating system: $OPERATING_SYSTEM"
+          echo "Course: $COURSE"
+          echo "Repository variable: ${DEMO_MESSAGE:-Not configured}"
+
+      - name: Check event using contains
+        if: contains(github.event_name, 'push') || contains(github.event_name, 'workflow_dispatch')
+        run: echo "The event condition matched!"
+
+      - name: Run after successful previous steps
+        if: success()
+        run: echo "Previous steps completed successfully."
+
+      - name: Run only if a previous step fails
+        if: failure()
+        run: echo "A previous step failed."
+
+      - name: Always run this step
+        if: always()
+        run: echo "The final step runs regardless of previous step status."
