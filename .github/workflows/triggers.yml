@@ -14,10 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show event
-        run: echo "Event name: ${{ github.event_name }}"
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: echo "Event name: $EVENT_NAME"
 
       - name: Show user
-        run: echo "Triggered by: ${{ github.actor }}"
+        env:
+          ACTOR: ${{ github.actor }}
+        run: echo "Triggered by: $ACTOR"
 
       - name: Show message
         run: echo "GitHub Actions is working!"
